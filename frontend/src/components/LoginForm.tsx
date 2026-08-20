@@ -17,7 +17,14 @@ export function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="auth-form">
       <label htmlFor={emailId}>Email</label>
-      <input id={emailId} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+      <input
+        id={emailId}
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        autoComplete="email"
+      />
 
       <label htmlFor={passwordId}>Password</label>
       <input

@@ -28,7 +28,11 @@ function AppShell() {
     case 'error':
       return <AuthGate />;
     case 'authenticated':
-      return state.user.role === 'admin' ? <Dashboard /> : <AdminOnlyNotice email={state.user.email} onLogout={logout} />;
+      return state.user.role === 'admin' ? (
+        <Dashboard />
+      ) : (
+        <AdminOnlyNotice email={state.user.email} onLogout={logout} />
+      );
     default:
       return assertNever(state, 'AppShell');
   }

@@ -84,9 +84,20 @@ export function Dashboard() {
 
         {retryError && <p className="error-banner">{retryError}</p>}
 
-        <BulkRetryBar selectedCount={selected.size} isRetrying={isRetrying} onRetry={() => void handleBulkRetry()} onClear={handleClearSelection} />
+        <BulkRetryBar
+          selectedCount={selected.size}
+          isRetrying={isRetrying}
+          onRetry={() => void handleBulkRetry()}
+          onClear={handleClearSelection}
+        />
 
-        <FailedJobsBody state={failedState} selected={selected} dispatchSelection={dispatchSelection} isPending={isPending} onPageChange={handlePageChange} />
+        <FailedJobsBody
+          state={failedState}
+          selected={selected}
+          dispatchSelection={dispatchSelection}
+          isPending={isPending}
+          onPageChange={handlePageChange}
+        />
       </section>
     </div>
   );

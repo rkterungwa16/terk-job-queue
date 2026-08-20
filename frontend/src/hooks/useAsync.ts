@@ -37,7 +37,10 @@ import type { AsyncState } from '../types/api';
  *    for any component or effect that receives it as a prop or lists it as
  *    a dependency (e.g. the polling `setInterval` in `useQueueStats`).
  */
-export function useAsync<T>(fetcher: (signal: AbortSignal) => Promise<T>, deps: unknown[]): AsyncState<T> & { refetch: () => void } {
+export function useAsync<T>(
+  fetcher: (signal: AbortSignal) => Promise<T>,
+  deps: unknown[],
+): AsyncState<T> & { refetch: () => void } {
   const [state, setState] = useState<AsyncState<T>>({ status: 'idle' });
   const fetcherRef = useRef(fetcher);
   fetcherRef.current = fetcher;

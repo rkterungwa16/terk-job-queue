@@ -16,8 +16,8 @@ export function AdminOnlyNotice({ email, onLogout }: AdminOnlyNoticeProps) {
       <div className="auth-card">
         <h1>Job Queue Dashboard</h1>
         <p>
-          Signed in as <strong>{email}</strong>, but this account doesn&apos;t have admin access. Ask an existing admin to
-          upgrade your account, or sign in with an admin account.
+          Signed in as <strong>{email}</strong>, but this account doesn&apos;t have admin access. Ask an existing admin
+          to upgrade your account, or sign in with an admin account.
         </p>
         <button type="button" className="primary" onClick={onLogout}>
           Log out

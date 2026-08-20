@@ -15,7 +15,10 @@ const RECURRENCE_OPTIONS: { value: RecurrenceType; label: string }[] = [
 ];
 
 export function ScheduleJobForm({ onScheduled }: ScheduleJobFormProps) {
-  const scheduleJob = useCallback((input: ScheduleJobRequest) => apiPost<ScheduleJobResponse>('/alerts/schedule', input), []);
+  const scheduleJob = useCallback(
+    (input: ScheduleJobRequest) => apiPost<ScheduleJobResponse>('/alerts/schedule', input),
+    [],
+  );
   const { state, mutate } = useMutation(scheduleJob);
 
   const userIdField = useId();
@@ -75,7 +78,13 @@ export function ScheduleJobForm({ onScheduled }: ScheduleJobFormProps) {
         </div>
         <div className="schedule-form__field">
           <label htmlFor={timeField}>First run</label>
-          <input id={timeField} type="datetime-local" value={firstRunTime} onChange={(e) => setFirstRunTime(e.target.value)} required />
+          <input
+            id={timeField}
+            type="datetime-local"
+            value={firstRunTime}
+            onChange={(e) => setFirstRunTime(e.target.value)}
+            required
+          />
         </div>
         <div className="schedule-form__field">
           <label htmlFor={typeField}>Recurrence</label>

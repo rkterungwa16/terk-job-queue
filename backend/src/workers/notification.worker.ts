@@ -5,7 +5,9 @@ import type { JobWorker } from '../types/job.types.js';
 // mailgun.js ships a CJS default export; under Node ESM interop that can
 // surface as either the class itself or `{ default: class }` depending on
 // the resolver, so this narrows for both shapes rather than trusting one.
-const MailgunCtor = (('default' in MailgunModule ? MailgunModule.default : MailgunModule) as unknown) as typeof MailgunModule.default;
+const MailgunCtor = ('default' in MailgunModule
+  ? MailgunModule.default
+  : MailgunModule) as unknown as typeof MailgunModule.default;
 
 const mailgun = new MailgunCtor(FormData as ConstructorParameters<typeof MailgunCtor>[0]);
 const mg = mailgun.client({

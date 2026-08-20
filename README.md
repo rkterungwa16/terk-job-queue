@@ -85,3 +85,20 @@ All of the above — including scheduling — requires an admin-role token;
 `/api/admin/*` does, since these actions are driven from the dashboard. See
 `docs/AUTH.md` for the tradeoff this implies if anything else was calling
 `/api/alerts/*` unauthenticated before.
+
+## Formatting
+
+Both projects use [Prettier](https://prettier.io), configured once via the
+root-level `.prettierrc.json` (Prettier resolves config by searching
+upward from each file, so one file covers both projects). Each project
+still carries its own `.prettierignore` and its own `prettier` dev
+dependency, though — Prettier's *ignore*-file lookup is relative to the
+directory it's run from, not resolved upward the way `.prettierrc` is, so
+a single root ignore file wouldn't reliably apply when running `npm run
+format` from inside `backend/` or `frontend/`.
+
+```bash
+cd backend   # or frontend
+npm run format         # rewrite files in place
+npm run format:check   # CI-friendly: exits non-zero if anything's unformatted, no writes
+```

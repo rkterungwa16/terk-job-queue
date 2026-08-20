@@ -36,7 +36,12 @@ export function FailedJobsTable({ jobs, selected, dispatchSelection }: FailedJob
       <thead>
         <tr>
           <th>
-            <input type="checkbox" checked={allSelected} onChange={handleToggleAll} aria-label="Select all failed jobs on this page" />
+            <input
+              type="checkbox"
+              checked={allSelected}
+              onChange={handleToggleAll}
+              aria-label="Select all failed jobs on this page"
+            />
           </th>
           <th>Job</th>
           <th>Status</th>

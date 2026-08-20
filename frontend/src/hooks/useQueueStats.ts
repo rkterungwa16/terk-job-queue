@@ -17,7 +17,10 @@ import { useAsync } from './useAsync';
  * current again right away rather than waiting for the next tick.
  */
 export function useQueueStats(pollMs = 5000): AsyncState<DashboardStatsResponse> & { refetch: () => void } {
-  const fetchStats = useCallback((signal: AbortSignal) => apiGet<DashboardStatsResponse>('/admin/queue/stats', signal), []);
+  const fetchStats = useCallback(
+    (signal: AbortSignal) => apiGet<DashboardStatsResponse>('/admin/queue/stats', signal),
+    [],
+  );
   const { refetch, ...state } = useAsync(fetchStats, []);
   const [isVisible, setIsVisible] = useState(() => document.visibilityState === 'visible');
 

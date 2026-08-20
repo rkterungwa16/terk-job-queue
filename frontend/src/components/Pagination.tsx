@@ -14,7 +14,11 @@ interface PaginationProps {
  * the component itself doesn't need to know *how* the pending state was
  * produced, only that it exists.
  */
-export const PaginationControls = memo(function PaginationControls({ pagination, onPageChange, isPending }: PaginationProps) {
+export const PaginationControls = memo(function PaginationControls({
+  pagination,
+  onPageChange,
+  isPending,
+}: PaginationProps) {
   const { currentPage, totalPages, totalItems } = pagination;
   const canGoPrev = currentPage > 1;
   const canGoNext = currentPage < totalPages;
@@ -27,7 +31,8 @@ export const PaginationControls = memo(function PaginationControls({ pagination,
         Previous
       </button>
       <span className="pagination__status">
-        Page {currentPage} of {totalPages} &middot; {totalItems.toLocaleString()} failed job{totalItems === 1 ? '' : 's'}
+        Page {currentPage} of {totalPages} &middot; {totalItems.toLocaleString()} failed job
+        {totalItems === 1 ? '' : 's'}
       </span>
       <button type="button" onClick={() => onPageChange(currentPage + 1)} disabled={!canGoNext}>
         Next

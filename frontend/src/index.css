@@ -6,7 +6,12 @@
   --text-muted: #8a8fa3;
   --accent: #2f6fed;
   color-scheme: dark;
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
 }
 
 * {
@@ -56,7 +61,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 0.6rem 0.75rem;
   border-bottom: 1px solid var(--panel-border);
@@ -134,11 +140,26 @@ th {
   text-transform: capitalize;
 }
 
-.badge--pending { background: #2a2d3a; color: #b7bccc; }
-.badge--processing { background: #16305c; color: #7aa7f5; }
-.badge--completed { background: #123a24; color: #5fd08c; }
-.badge--failed { background: #4a1919; color: #f18a8a; }
-.badge--paused { background: #3f2f0f; color: #eab55c; }
+.badge--pending {
+  background: #2a2d3a;
+  color: #b7bccc;
+}
+.badge--processing {
+  background: #16305c;
+  color: #7aa7f5;
+}
+.badge--completed {
+  background: #123a24;
+  color: #5fd08c;
+}
+.badge--failed {
+  background: #4a1919;
+  color: #f18a8a;
+}
+.badge--paused {
+  background: #3f2f0f;
+  color: #eab55c;
+}
 
 .failed-row__error {
   max-width: 280px;
@@ -152,7 +173,8 @@ th {
   background: rgba(47, 111, 237, 0.08);
 }
 
-.empty-state, .loading-state {
+.empty-state,
+.loading-state {
   color: var(--text-muted);
   padding: 2rem 0;
 }

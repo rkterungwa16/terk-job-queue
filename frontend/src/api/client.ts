@@ -63,7 +63,11 @@ export function apiGet<TResponse>(path: string, signal?: AbortSignal): Promise<T
   return request<TResponse>(path, { method: 'GET', signal });
 }
 
-export function apiPost<TResponse, TBody = unknown>(path: string, body: TBody, signal?: AbortSignal): Promise<TResponse> {
+export function apiPost<TResponse, TBody = unknown>(
+  path: string,
+  body: TBody,
+  signal?: AbortSignal,
+): Promise<TResponse> {
   return request<TResponse>(path, { method: 'POST', body: JSON.stringify(body), signal });
 }
 

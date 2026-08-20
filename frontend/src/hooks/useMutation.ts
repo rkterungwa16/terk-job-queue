@@ -24,7 +24,9 @@ export interface UseMutationResult<TInput, TOutput> {
  * the full error detail is still available via `state.error` for
  * rendering.
  */
-export function useMutation<TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>): UseMutationResult<TInput, TOutput> {
+export function useMutation<TInput, TOutput>(
+  fn: (input: TInput) => Promise<TOutput>,
+): UseMutationResult<TInput, TOutput> {
   const [state, setState] = useState<AsyncState<TOutput>>({ status: 'idle' });
 
   const mutate = useCallback(

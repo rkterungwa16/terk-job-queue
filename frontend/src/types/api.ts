@@ -91,10 +91,7 @@ export interface PauseResumeResponse {
  * `data` only exists on the `success` branch, `error` only on `error`.
  */
 export type AsyncState<TData> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: TData }
-  | { status: 'error'; error: string };
+  { status: 'idle' } | { status: 'loading' } | { status: 'success'; data: TData } | { status: 'error'; error: string };
 
 /**
  * GENERIC UTILITY TYPE built from `Pick`: the query params the failed-jobs

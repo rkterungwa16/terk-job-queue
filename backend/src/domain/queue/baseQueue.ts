@@ -257,11 +257,33 @@ export class BaseJobQueue extends TypedEmitter<QueueEvents> {
     return [
       {
         $set: {
-          status: { $cond: [{ $eq: ['$status', 'paused_while_processing'] }, pausedBranch.status, normalBranch['status']] },
-          attempts: { $cond: [{ $eq: ['$status', 'paused_while_processing'] }, pausedBranch.attempts, normalBranch['attempts'] ?? '$attempts'] },
-          runAt: { $cond: [{ $eq: ['$status', 'paused_while_processing'] }, '$runAt', normalBranch['runAt'] ?? '$runAt'] },
-          errorReason: { $cond: [{ $eq: ['$status', 'paused_while_processing'] }, pausedBranch.errorReason, normalBranch['errorReason'] ?? null] },
-          errorStack: { $cond: [{ $eq: ['$status', 'paused_while_processing'] }, pausedBranch.errorStack, normalBranch['errorStack'] ?? null] },
+          status: {
+            $cond: [{ $eq: ['$status', 'paused_while_processing'] }, pausedBranch.status, normalBranch['status']],
+          },
+          attempts: {
+            $cond: [
+              { $eq: ['$status', 'paused_while_processing'] },
+              pausedBranch.attempts,
+              normalBranch['attempts'] ?? '$attempts',
+            ],
+          },
+          runAt: {
+            $cond: [{ $eq: ['$status', 'paused_while_processing'] }, '$runAt', normalBranch['runAt'] ?? '$runAt'],
+          },
+          errorReason: {
+            $cond: [
+              { $eq: ['$status', 'paused_while_processing'] },
+              pausedBranch.errorReason,
+              normalBranch['errorReason'] ?? null,
+            ],
+          },
+          errorStack: {
+            $cond: [
+              { $eq: ['$status', 'paused_while_processing'] },
+              pausedBranch.errorStack,
+              normalBranch['errorStack'] ?? null,
+            ],
+          },
         },
       },
     ];
@@ -306,7 +328,9 @@ export class BaseJobQueue extends TypedEmitter<QueueEvents> {
     return result.modifiedCount;
   }
 
-  async getDashboardStats(filters: DashboardFilters = {}): Promise<{ appliedFilters: DashboardFilters; jobCounts: StatusCounts }> {
+  async getDashboardStats(
+    filters: DashboardFilters = {},
+  ): Promise<{ appliedFilters: DashboardFilters; jobCounts: StatusCounts }> {
     const matchQuery: Record<string, unknown> = {};
     if (filters.userId) matchQuery['data.userId'] = filters.userId;
     if (filters.date) {
@@ -342,7 +366,11 @@ export class BaseJobQueue extends TypedEmitter<QueueEvents> {
     }
     const [totalItems, jobs] = await Promise.all([
       JobModel.countDocuments(query),
-      JobModel.find(query).sort({ updatedAt: -1 }).skip((page - 1) * limit).limit(limit).lean(),
+      JobModel.find(query)
+        .sort({ updatedAt: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .lean(),
     ]);
     return {
       pagination: { totalItems, totalPages: Math.ceil(totalItems / limit), currentPage: page, itemsPerPage: limit },

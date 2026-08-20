@@ -11,13 +11,7 @@ import type { Types } from 'mongoose';
  * A plain `string` would let a typo like `'complated'` slip through silently
  * both here and in Mongo queries built from it.
  */
-export type JobStatus =
-  | 'pending'
-  | 'processing'
-  | 'completed'
-  | 'failed'
-  | 'paused'
-  | 'paused_while_processing';
+export type JobStatus = 'pending' | 'processing' | 'completed' | 'failed' | 'paused' | 'paused_while_processing';
 
 export type RecurrenceInterval = 'hourly' | 'daily' | 'weekly';
 
@@ -182,6 +176,4 @@ export type AddJobOptions = Partial<{
 }>;
 
 /** Only the fields `next()` is ever allowed to `$set` on a job document. */
-export type JobStatusUpdate = Partial<
-  Pick<Job, 'status' | 'attempts' | 'runAt' | 'errorReason' | 'errorStack'>
->;
+export type JobStatusUpdate = Partial<Pick<Job, 'status' | 'attempts' | 'runAt' | 'errorReason' | 'errorStack'>>;

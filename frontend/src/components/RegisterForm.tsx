@@ -19,7 +19,14 @@ export function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="auth-form">
       <label htmlFor={emailId}>Email</label>
-      <input id={emailId} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+      <input
+        id={emailId}
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        autoComplete="email"
+      />
 
       <label htmlFor={passwordId}>Password</label>
       <input
@@ -34,7 +41,13 @@ export function RegisterForm() {
       <p className="field-hint">At least 8 characters.</p>
 
       <label htmlFor={adminKeyId}>Admin key (optional)</label>
-      <input id={adminKeyId} type="password" value={adminKey} onChange={(e) => setAdminKey(e.target.value)} autoComplete="off" />
+      <input
+        id={adminKeyId}
+        type="password"
+        value={adminKey}
+        onChange={(e) => setAdminKey(e.target.value)}
+        autoComplete="off"
+      />
       <p className="field-hint">Only needed to register as an admin. Leave blank for a regular account.</p>
 
       {state.status === 'error' && <p className="error-banner">{state.error}</p>}
