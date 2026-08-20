@@ -2,8 +2,16 @@ import express, { type Request, type Response } from 'express';
 import { z } from 'zod';
 import { sharedQueue } from '../infrastructure/server.js';
 import { validateBody } from '../adapters/middleware/validate.middleware.js';
+import { authorizeRoles } from '../adapters/middleware/auth.middleware.js';
 
 const router = express.Router();
+
+// These routes now back the admin dashboard's "schedule/pause/resume"
+// controls, so they're gated the same way `admin.routes.ts` is. Previously
+// this router had no auth at all; if some other, non-admin system still
+// needs to schedule reminders programmatically, it'll need its own
+// service-account route or token, not this one.
+router.use(authorizeRoles('admin'));
 
 const reminderSchema = z.object({
   userId: z.string().min(1),

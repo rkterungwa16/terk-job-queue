@@ -7,6 +7,7 @@ import { useSelection } from '../hooks/useSelection';
 import { useAuth } from '../auth/AuthContext';
 import { assertNever } from '../types/utils';
 import { StatsPanel } from './StatsPanel';
+import { SchedulePanel } from './SchedulePanel';
 import { SearchBar } from './SearchBar';
 import { FailedJobsTable } from './FailedJobsTable';
 import { PaginationControls } from './Pagination';
@@ -14,7 +15,7 @@ import { BulkRetryBar } from './BulkRetryBar';
 
 export function Dashboard() {
   const { state: authState, logout } = useAuth();
-  const statsState = useQueueStats(5000);
+  const { refetch: refetchStats, ...statsState } = useQueueStats(5000);
   const { state: failedState, setPage, searchText, setSearchText, refetch: refetchFailed } = useFailedJobs(10);
   const [selected, dispatchSelection] = useSelection();
   const [isRetrying, setIsRetrying] = useState(false);
@@ -73,6 +74,8 @@ export function Dashboard() {
       </header>
 
       <StatsPanel state={statsState} />
+
+      <SchedulePanel onScheduled={refetchStats} />
 
       <section className="dashboard__failed-jobs">
         <div className="dashboard__toolbar">

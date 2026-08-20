@@ -277,3 +277,84 @@ th {
   color: var(--accent);
   text-decoration: underline;
 }
+
+.success-banner {
+  background: #123a24;
+  border: 1px solid #1f5c3a;
+  color: #7fe0ab;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin: 0.75rem 0;
+}
+
+.schedule-panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.schedule-panel h2 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.schedule-panel h3 {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 1.5rem 0 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--panel-border);
+}
+
+.schedule-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.schedule-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.schedule-form__field label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.schedule-form__field input,
+.schedule-form__field select {
+  max-width: none;
+}
+
+.schedule-form select {
+  font: inherit;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+}
+
+.schedule-form button[type='submit'] {
+  margin-top: 1rem;
+}
+
+.pause-resume-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.pause-resume-form .schedule-form__field {
+  flex: 1 1 240px;
+}
+
+.pause-resume-form__actions {
+  display: flex;
+  gap: 0.5rem;
+}

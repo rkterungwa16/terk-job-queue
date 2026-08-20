@@ -48,6 +48,34 @@ export interface BulkRetryResponse {
 }
 
 /**
+ * UNION TYPE mirroring the backend's `RecurrenceInterval` plus `'one_time'`
+ * (the backend's zod `type` enum on `/alerts/schedule`, not persisted on
+ * the job document itself the same way - `isRecurring`/`interval` are
+ * derived from it server-side).
+ */
+export type RecurrenceType = 'one_time' | 'hourly' | 'daily' | 'weekly';
+
+export interface ScheduleJobRequest {
+  userId: string;
+  eventId: string;
+  title: string;
+  email: string;
+  /** ISO datetime string - the backend's zod schema requires `z.string().datetime()`. */
+  firstRunTime: string;
+  type: RecurrenceType;
+}
+
+export interface ScheduleJobResponse {
+  message: string;
+  jobId: string;
+}
+
+export interface PauseResumeResponse {
+  message: string;
+  matches: number;
+}
+
+/**
  * ---------------------------------------------------------------------------
  * DISCRIMINATED UNION - async request lifecycle
  * ---------------------------------------------------------------------------

@@ -16,7 +16,7 @@ import { useAsync } from './useAsync';
  * the tab regains visibility, an immediate `refetch()` gets the counters
  * current again right away rather than waiting for the next tick.
  */
-export function useQueueStats(pollMs = 5000): AsyncState<DashboardStatsResponse> {
+export function useQueueStats(pollMs = 5000): AsyncState<DashboardStatsResponse> & { refetch: () => void } {
   const fetchStats = useCallback((signal: AbortSignal) => apiGet<DashboardStatsResponse>('/admin/queue/stats', signal), []);
   const { refetch, ...state } = useAsync(fetchStats, []);
   const [isVisible, setIsVisible] = useState(() => document.visibilityState === 'visible');
@@ -37,5 +37,9 @@ export function useQueueStats(pollMs = 5000): AsyncState<DashboardStatsResponse>
     return () => window.clearInterval(id);
   }, [isVisible, refetch, pollMs]);
 
-  return state;
+  // Exposed (not just used internally for polling) so callers like
+  // `Dashboard` can trigger an immediate refresh right after an action that
+  // changes the counts - e.g. scheduling a new job - instead of waiting up
+  // to `pollMs` for the next tick to reflect it.
+  return { ...state, refetch };
 }
