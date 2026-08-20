@@ -4,6 +4,7 @@ import { connectDB } from '../config/database.js';
 import { BaseJobQueue } from '../domain/queue/baseQueue.js';
 import alertRoutes from '../routes/alert.routes.js';
 import adminRoutes from '../routes/admin.routes.js';
+import authRoutes from '../routes/auth.routes.js';
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ export const sharedQueue = new BaseJobQueue(3);
 await sharedQueue.recoverStuckJobs();
 sharedQueue.startProcessing();
 
+app.use('/api/auth', authRoutes);
 app.use('/api/alerts', alertRoutes);
 app.use('/api/admin', adminRoutes);
 
