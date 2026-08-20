@@ -205,3 +205,75 @@ th {
   color: var(--text-muted);
   margin-bottom: 0.3rem;
 }
+
+.dashboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.auth-gate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+.auth-card h1 {
+  font-size: 1.15rem;
+  margin: 0 0 1.25rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.auth-form label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.auth-form input {
+  max-width: none;
+}
+
+.auth-form button[type='submit'] {
+  margin-top: 1rem;
+}
+
+.field-hint {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.auth-switch {
+  width: 100%;
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  text-decoration: underline;
+}

@@ -4,6 +4,7 @@ import type { AsyncState, BulkRetryResponse, FailedJobsResponse } from '../types
 import { useFailedJobs } from '../hooks/useFailedJobs';
 import { useQueueStats } from '../hooks/useQueueStats';
 import { useSelection } from '../hooks/useSelection';
+import { useAuth } from '../auth/AuthContext';
 import { assertNever } from '../types/utils';
 import { StatsPanel } from './StatsPanel';
 import { SearchBar } from './SearchBar';
@@ -12,6 +13,7 @@ import { PaginationControls } from './Pagination';
 import { BulkRetryBar } from './BulkRetryBar';
 
 export function Dashboard() {
+  const { state: authState, logout } = useAuth();
   const statsState = useQueueStats(5000);
   const { state: failedState, setPage, searchText, setSearchText, refetch: refetchFailed } = useFailedJobs(10);
   const [selected, dispatchSelection] = useSelection();
@@ -60,6 +62,14 @@ export function Dashboard() {
     <div className="dashboard">
       <header className="dashboard__header">
         <h1>Job Queue Dashboard</h1>
+        {authState.status === 'authenticated' && (
+          <div className="dashboard__user">
+            <span>{authState.user.email}</span>
+            <button type="button" onClick={logout}>
+              Log out
+            </button>
+          </div>
+        )}
       </header>
 
       <StatsPanel state={statsState} />

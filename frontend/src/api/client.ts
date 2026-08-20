@@ -1,3 +1,5 @@
+import { tokenStore } from '../auth/tokenStore';
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? '/api';
 
 export class ApiError extends Error {
@@ -25,10 +27,22 @@ export class ApiError extends Error {
  * infect every caller.
  */
 async function request<TResponse>(path: string, init?: RequestInit): Promise<TResponse> {
+  const token = tokenStore.getToken();
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
-    headers: { 'Content-Type': 'application/json', ...init?.headers },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...init?.headers,
+    },
   });
+
+  if (res.status === 401) {
+    // Token missing/expired/invalid server-side - clear it so the UI falls
+    // back to the login screen instead of repeatedly failing every request
+    // with a token that will never start working again on its own.
+    tokenStore.setToken(null);
+  }
 
   if (!res.ok) {
     const body: unknown = await res.json().catch(() => null);
